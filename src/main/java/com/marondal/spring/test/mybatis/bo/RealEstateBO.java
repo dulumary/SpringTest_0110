@@ -36,6 +36,41 @@ public class RealEstateBO {
 	}
 	
 	
+	// 객체를 기반으로 한행을 저장하는 기능
+	public int addRealEstateByObject(RealEstate realEstate) {
+		
+		return realEstateDAO.insertRealEstateByObject(realEstate);
+		
+	}
+	
+	// 저장할 값을 모두 전달 받고 저장하는 기능 
+	public int addRealEstate(
+			int realtorId
+			, String address
+			, int area
+			, String type
+			, int price
+			, int rentPrice) {
+		
+		return realEstateDAO.insertRealEstate(realtorId, address, area, type, price, rentPrice);
+		
+		
+	}
+	
+	
+	// 변경할 대상 id , 변경할 type, 변경할 price
+	public int updateRealEstate(int id, String type, int price) {
+		return realEstateDAO.updateRealEstate(id, type, price);
+		
+	}
+	
+	public int deleteRealEstate(int id) {
+		return realEstateDAO.deleteRealEstate(id);
+	}
+	
+	
+	
+	
 	
 	
 

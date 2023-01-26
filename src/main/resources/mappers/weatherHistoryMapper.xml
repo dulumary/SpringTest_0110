@@ -9,6 +9,7 @@
 	<select id="selectWeatherHistory" resultType="com.marondal.spring.test.jstl.model.WeatherHistory">
 		SELECT 
 			`id`
+			, `date`
 			, `weather`
 			, `temperatures`
 			, `precipitation`
@@ -19,6 +20,34 @@
 		FROM
 			`weatherhistory`
 	</select>
+	
+	<insert id="insertWeather" parameterType="map">
+		INSERT INTO 
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE 
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+			, now()
+			, now()
+		)
+		
+	
+	</insert>
 
 
 </mapper>

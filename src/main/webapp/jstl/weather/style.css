@@ -6,14 +6,16 @@
 
 .contents > .main-menu {
 	width:200px;
-	height:500px;
 	background-color:cornflowerblue;
 }
 
 .contents > .main-contents {
 	width:1000px;
-	height:500px;
 }
+
+.input-lable {
+        		width:120px;
+        	}
 
 footer > .logo {
 	width:200px;

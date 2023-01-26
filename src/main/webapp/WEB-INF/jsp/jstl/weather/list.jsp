@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +30,8 @@
 				</div>
 				
 				<ul class="nav flex-column">
-					<li class="nav-item"><a href="#" class="nav-link text-white">날씨</a></li>
-					<li class="nav-item"><a href="#" class="nav-link text-white">날씨입력</a></li>
+					<li class="nav-item"><a href="/jstl/weather/list" class="nav-link text-white">날씨</a></li>
+					<li class="nav-item"><a href="/jstl/weather/input" class="nav-link text-white">날씨입력</a></li>
 					<li class="nav-item"><a href="#" class="nav-link text-white">테마날씨</a></li>
 					<li class="nav-item"><a href="#" class="nav-link text-white">관측기후</a></li>
 				</ul>
@@ -48,22 +51,37 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach var="weather" items="${weatherHistory }" >
 						<tr>
-							<td>2023년 1월 25일</td>
-							<td><img src="http://marondal.com/material/images/dulumary/web/jstl/sunny.jpg"></td>
-							<td>-16°C</td>
-							<td>12.3mm</td>
-							<td>보통</td>
-							<td>1.0km/h</td>
+							<td><fmt:formatDate value="${weather.date }" pattern="yyyy년 M월 d일" /> </td>
+							<td>
+								<c:choose>
+									<c:when test="${weather.weather eq '맑음' }">
+										<img src="http://marondal.com/material/images/dulumary/web/jstl/sunny.jpg">		
+									</c:when>
+									<c:when test="${weather.weather eq '구름조금' }">
+										<img src="http://marondal.com/material/images/dulumary/web/jstl/partlyCloudy.jpg">		
+									</c:when>
+									<c:when test="${weather.weather eq '흐림' }">
+										<img src="http://marondal.com/material/images/dulumary/web/jstl/cloudy.jpg">		
+									</c:when>
+									<c:when test="${weather.weather eq '비' }">
+										<img src="http://marondal.com/material/images/dulumary/web/jstl/rainy.jpg">		
+									</c:when>
+									<c:otherwise>
+										${weather.weather }
+									</c:otherwise>
+								
+								</c:choose>
+								
+							</td>
+							<td>${weather.temperatures }°C</td>
+							<td>${weather.precipitation }mm</td>
+							<td>${weather.microDust }</td>
+							<td>${weather.windSpeed }km/h</td>
 						</tr>
-						<tr>
-							<td>2023년 1월 24일</td>
-							<td><img src="http://marondal.com/material/images/dulumary/web/jstl/sunny.jpg"></td>
-							<td>-19°C</td>
-							<td>0.0mm</td>
-							<td>나쁨</td>
-							<td>1.5km/h</td>
-						</tr>
+						</c:forEach>
+						
 					</tbody>
 				
 				</table>

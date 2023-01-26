@@ -1,14 +1,15 @@
 package com.marondal.spring.test.jstl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.marondal.spring.test.jstl.bo.WeatherHistoryBO;
 import com.marondal.spring.test.jstl.model.WeatherHistory;
@@ -36,7 +37,8 @@ public class WeatherHistoryController {
 	
 	@GetMapping("/add")
 	public String addWeather(
-			@RequestParam("date") String date
+			@DateTimeFormat(pattern="yyyy년 M월 d일")
+			@RequestParam("date") Date date
 			, @RequestParam("weather") String weather
 			, @RequestParam("temperatures") double temperatures
 			, @RequestParam("precipitation") double precipitation

@@ -116,7 +116,7 @@
 	
 	<script>
 		$("#date").datepicker({
-			dateFormat:"yy-mm-dd"
+			dateFormat:"yy년 m월 d일"
 		});
 	
 	</script>

@@ -20,13 +20,54 @@
 		
 		<label class="mt-3">주소</label>
 
-		<input type="text" class="form-control" id="urlInput">
+		<div class="d-flex">
+			<input type="text" class="form-control" id="urlInput">
+			<button type="button" class="btn btn-info" id="duplicateBtn">중복확인</button>
+		</div>
 
-		<button type="button" id="addBtn" class="btn btn-success btn-block mt-3">추가</button>
+		<button type="button" id="addBtn"  class="btn btn-success btn-block mt-3">추가</button>
 	</div>
 	
 	<script>
 		$(document).ready(function() {
+			
+			$("#duplicateBtn").on("click", function() {
+				let url = $("#urlInput").val();
+				
+				if(url == "") {
+					alert("주소를 입력하세요");
+					return ;
+				}
+				
+				if(!(url.startsWith("http://") || url.startsWith("https://"))) {
+					alert("주소 형식이 잘못되었습니다.");
+					return ;
+				}
+				
+				
+				$.ajax({
+					type:"post"
+					, url:"/ajax/favorite/is_duplicate"
+					, data:{"url":url}
+					, success:function(data) {
+						
+						if(data.is_duplicate) {
+							alert("중복되었습니다.");
+						} else {
+							alert("사용가능합니다.");
+						}
+					}
+					, error:function() {
+						alert("중복확인 에러");
+					}
+				
+				});
+				
+				
+				
+			});
+			
+		
 			
 			$("#addBtn").on("click", function() {
 				
@@ -43,6 +84,15 @@
 					alert("주소를 입력하세요");
 					return ;
 				}
+				
+				// https://, http://
+				// http 로 시작하지 않고 https로 시작하지 않으면
+				// if(!url.startsWith("http://") && !url.startsWith("https://")) {
+				if(!(url.startsWith("http://") || url.startsWith("https://"))) {
+					alert("주소 형식이 잘못되었습니다.");
+					return ;
+				}
+				
 				
 				$.ajax({
 					type:"post"

@@ -63,5 +63,30 @@ public class FavoriteController {
 	public String favoriteInput() {
 		return "ajax/favorite/input";
 	}
+	
+	// url 을 전달 받고, 중복 여부를 확인하는 API
+	@PostMapping("/is_duplicate")
+	@ResponseBody
+	public Map<String, Boolean> isDuplicateUrl(@RequestParam("url") String url) {
+		
+		// {"is_duplicate":true}
+		// {"is_duplicate":false}
+		
+		Map<String, Boolean> result = new HashMap<>();
+		
+//		if(favoriteBO.isDuplicateUrl(url)) {  // 중복되었다. 
+//			result.put("is_duplicate", true);
+//		} else {
+//			result.put("is_duplicate", false);
+//		}
+		
+		result.put("is_duplicate", favoriteBO.isDuplicateUrl(url));
+		
+		return result;
+		
+	}
+	
+	
+	
 
 }

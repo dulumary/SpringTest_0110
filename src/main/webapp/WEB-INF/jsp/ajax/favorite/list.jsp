@@ -27,6 +27,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			
@@ -36,6 +37,7 @@
 					<td>${status.count }</td>
 					<td>${favorite.name }</td>
 					<td>${favorite.url }</td>
+					<td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -36,5 +36,9 @@ public class BookingBO {
 		return bookingDAO.deleteBooking(id);
 		
 	}
+	
+	public Booking findBooking(String name, String phoneNumber) {
+		
+	}
 
 }

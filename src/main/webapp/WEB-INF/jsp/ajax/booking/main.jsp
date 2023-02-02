@@ -51,16 +51,16 @@
                         <div class="no-member-input mt-3y" id="nonMember">
                             <div class="input-gorup form-inline">
                                 <label class="input-label">이름 </label>
-                                <input type="text" class="form-control text-input">
+                                <input type="text" id="nameInput" class="form-control text-input">
                             </div>
                             <div class="input-gorup form-inline mt-3">
                                 <label class="input-label">전화번호 </label>
-                                <input type="text" class="form-control text-input">
+                                <input type="text" id="phoneNumberInput" class="form-control text-input">
                             </div>
                        
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-success mt-3 mr-5">조회 하기</button>
+                            <button class="btn btn-success mt-3 mr-5" id="findBtn">조회 하기</button>
                         </div>
                     </div>
                 </article>
@@ -86,7 +86,35 @@
         </div>
 	<script>
 		$(document).ready(function() {
-			
+			$("#findBtn").on("click", function() {
+				let name = $("#nameInput").val();
+				let phoneNumber = $("#phoneNumberInput").val();
+				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/booking/find"
+					, data:{"name":name, "phoneNumber":phoneNumber}
+					, success:function(data) {
+						
+						if(data.result == "fail") {
+							alert("조회대상이 없습니다.");
+						} else {
+													
+							alert("이름 : " + data.booking.name + 
+									"\n날짜 : " + data.booking.date.substring(0, 10) + 
+									"\n일수 : " + data.booking.day + 
+									"\n인원 : " + data.booking.headcount + 
+									"\n상태 : " + data.booking.state);
+						}
+						
+					}
+					, error:function() {
+						alert("조회 에러");
+					}
+				});
+				
+				
+			});
 			
 		});
 	

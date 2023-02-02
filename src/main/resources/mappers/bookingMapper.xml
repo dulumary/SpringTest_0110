@@ -61,6 +61,28 @@
 	
 	</delete>
 	
+	<select id="selectBookingByNamePhoneNumber" parameterType="map"
+	resultType="com.marondal.spring.test.ajax.model.Booking">
+		SELECT 
+			`id`
+			, `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`booking`
+		WHERE
+			`name` = #{name} 
+			AND `phoneNumber` = #{phoneNumber}
+			
+	
+	
+	</select>
+	
 
 
 </mapper>

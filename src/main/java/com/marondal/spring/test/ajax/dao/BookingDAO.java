@@ -21,5 +21,9 @@ public interface BookingDAO {
 			, @Param("state") String state);
 	
 	public int deleteBooking(@Param("id") int id);
+	
+	public Booking selectBookingByNamePhoneNumber(
+			@Param("name") String name
+			, @Param("phoneNumber") String phoneNumber);
 
 }
